@@ -24,10 +24,18 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="excited" id="oio-ND-XcX">
                                         <rect key="frame" x="158" y="54" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Ue9-Ya-kH2" appends="YES" id="PZx-uD-6tr"/>
+                                        </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="dead" id="LdK-sr-PTe">
                                         <rect key="frame" x="158" y="147" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Ql9-kJ-EdF" appends="YES" id="Wlb-Ef-87S"/>
+                                        </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="down_arrow" id="IQH-kr-pQp">
                                         <rect key="frame" x="178" y="19" width="20" height="14"/>
@@ -36,27 +44,86 @@
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="happy" id="but-cg-4YO">
                                         <rect key="frame" x="47" y="54" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <color key="tintColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="VyT-pD-Ijv" appends="YES" id="STC-z8-mAf"/>
+                                        </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="sad" id="jUa-TV-dbc">
                                         <rect key="frame" x="268" y="147" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="g99-5z-AQT" appends="YES" id="qX1-Jc-0nH"/>
+                                        </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="tongue" id="k7i-SQ-fms">
                                         <rect key="frame" x="47" y="147" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="jOX-Ud-fwe" appends="YES" id="hzy-dj-wUX"/>
+                                        </connections>
                                     </imageView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="wink" id="Aqh-4Y-xyq">
                                         <rect key="frame" x="268" y="54" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="G8O-nk-eh7" appends="YES" id="j1e-Vb-dOr"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.91011618589743593" green="0.91011618589743593" blue="0.91011618589743593" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="grz-yc-pez" appends="YES" id="Opc-M9-jot"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="trayView" destination="gx7-WL-mbC" id="GfY-CF-CvX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="grz-yc-pez">
+                    <connections>
+                        <action selector="didPanTray:" destination="BYZ-38-t0r" id="H1z-Ag-S0f"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="VyT-pD-Ijv">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="e1s-20-qtM"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Ue9-Ya-kH2">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="54b-2Q-04X"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="G8O-nk-eh7">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="yJp-yx-O0S"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="jOX-Ud-fwe">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="3Yr-YK-wcc"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Ql9-kJ-EdF">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="RdB-sl-pES"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="g99-5z-AQT">
+                    <connections>
+                        <action selector="createdFace:" destination="BYZ-38-t0r" id="ciB-Q5-vaP"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="85.5" y="154.5"/>
         </scene>
