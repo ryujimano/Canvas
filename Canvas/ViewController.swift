@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var trayView: UIView!
+    @IBOutlet weak var downArrow: UIImageView!
     var trayOriginalCenter: CGPoint!
     
     var trayDownOffset: CGFloat!
@@ -46,11 +48,13 @@ class ViewController: UIViewController {
             if velocity.y > 0 {
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                     self.trayView.center = self.trayDown
+                    self.downArrow.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI))
                 }, completion: nil)
             }
             else {
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                     self.trayView.center = self.trayUp
+                    self.downArrow.transform = CGAffineTransform(rotationAngle: CGFloat(0))
                 }, completion: nil)
             }
         }
@@ -62,6 +66,9 @@ class ViewController: UIViewController {
             var faceView = sender.view as! UIImageView
             newlyCreatedFace = UIImageView(image: faceView.image)
             view.addSubview(newlyCreatedFace)
+            let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+            newlyCreatedFace.addGestureRecognizer(panGestureRecognizer)
+            newlyCreatedFace.isUserInteractionEnabled = true
             self.newlyCreatedFace.center = faceView.center
             self.newlyCreatedFace.center.y += self.trayView.frame.origin.y
             self.newlyCreatedFaceOriginalCenter = self.newlyCreatedFace.center
@@ -79,6 +86,24 @@ class ViewController: UIViewController {
         }
     }
     
+    func didPan(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        if sender.state == .began {
+            newlyCreatedFace = sender.view as! UIImageView
+            newlyCreatedFaceOriginalCenter = newlyCreatedFace.center
+            UIView.animate(withDuration: 0.1, animations: {
+                self.newlyCreatedFace.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            })
+        }
+        else if sender.state == .changed {
+             newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
+        }
+        else if sender.state == .ended {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
+                self.newlyCreatedFace.transform = self.newlyCreatedFace.transform.scaledBy(x: 0.7, y: 0.7)
+            }, completion: nil)
+        }
+    }
 
 }
 
