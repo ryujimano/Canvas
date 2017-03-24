@@ -69,6 +69,13 @@ class ViewController: UIViewController {
             let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
             newlyCreatedFace.addGestureRecognizer(panGestureRecognizer)
             newlyCreatedFace.isUserInteractionEnabled = true
+            let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(didPinch(_:)))
+            newlyCreatedFace.addGestureRecognizer(pinchGestureRecognizer)
+            let rotateGestureRecognizer = UIRotationGestureRecognizer(target: self, action: #selector(didRotate(_:)))
+            newlyCreatedFace.addGestureRecognizer(rotateGestureRecognizer)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(_:)))
+            tapGestureRecognizer.numberOfTapsRequired = 2
+            newlyCreatedFace.addGestureRecognizer(tapGestureRecognizer)
             self.newlyCreatedFace.center = faceView.center
             self.newlyCreatedFace.center.y += self.trayView.frame.origin.y
             self.newlyCreatedFaceOriginalCenter = self.newlyCreatedFace.center
@@ -80,6 +87,12 @@ class ViewController: UIViewController {
             self.newlyCreatedFace.center = CGPoint(x: self.newlyCreatedFaceOriginalCenter.x + translation.x, y: self.newlyCreatedFaceOriginalCenter.y + translation.y)
         }
         else if sender.state == .ended {
+            if newlyCreatedFace.center.y > trayView.frame.origin.y {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.newlyCreatedFace.removeFromSuperview()
+                    return
+                })
+            }
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                 self.newlyCreatedFace.transform = self.newlyCreatedFace.transform.scaledBy(x: 0.7, y: 0.7)
             }, completion: nil)
@@ -99,11 +112,36 @@ class ViewController: UIViewController {
              newlyCreatedFace.center = CGPoint(x: newlyCreatedFaceOriginalCenter.x + translation.x, y: newlyCreatedFaceOriginalCenter.y + translation.y)
         }
         else if sender.state == .ended {
+            if newlyCreatedFace.center.y > trayView.frame.origin.y {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.newlyCreatedFace.removeFromSuperview()
+                    return
+                })
+            }
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: [], animations: {
                 self.newlyCreatedFace.transform = self.newlyCreatedFace.transform.scaledBy(x: 0.7, y: 0.7)
             }, completion: nil)
         }
     }
 
+    func didPinch(_ sender: UIPinchGestureRecognizer) {
+        let scale = sender.scale
+        if sender.state == .changed {
+            newlyCreatedFace.transform = newlyCreatedFace.transform.scaledBy(x: scale, y: scale)
+            sender.scale = 1
+        }
+    }
+    
+    func didRotate(_ sender: UIRotationGestureRecognizer) {
+        let rotation = sender.rotation
+        if sender.state == .changed {
+            newlyCreatedFace.transform = newlyCreatedFace.transform.rotated(by: rotation)
+            sender.rotation = 0
+        }
+    }
+    
+    func didTap(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
 }
 
